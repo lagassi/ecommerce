@@ -185,4 +185,13 @@ $app->get("/login", function(){
  
  });
 
+ $app->get("/logout", function (){
+
+ 	User::logout();
+
+ 	header("Location: /login");
+ 	exit;
+
+ });
+
  ?>
