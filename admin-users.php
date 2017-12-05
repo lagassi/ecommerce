@@ -87,6 +87,14 @@ $app->post("/admin/users/:iduser", function($iduser){
 
 	$user->get((int)$iduser);
 
+    $new_password = User::getPasswordHash($_POST['despassword']);
+ 
+    if ($new_password != $user->getdespassword()) {
+            $_POST['despassword'] = $new_password;
+    } else {
+            $_POST['despassword'] = $user->getdespassword();
+    }
+
 	$user->setData($_POST);
 
 	$user->update();
