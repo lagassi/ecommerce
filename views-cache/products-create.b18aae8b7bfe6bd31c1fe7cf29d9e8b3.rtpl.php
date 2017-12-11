@@ -23,7 +23,7 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="/admin/products/create" method="post">
+        <form role="form" action="/admin/products/create" method="post" enctype="multipart/form-data">
           <div class="box-body">
             <div class="form-group">
               <label for="desproduct">Nome da produto</label>
@@ -54,13 +54,8 @@
               <input type="text" class="form-control" id="desurl" name="desurl">
             </div>
             <div class="form-group">
-              <label for="file">Foto</label>
-              <input type="file" class="form-control" id="file" name="file" value="<?php echo htmlspecialchars( $product["vlweight"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
-              <div class="box box-widget">
-                <div class="box-body">
-                  <img class="img-responsive" id="image-preview" src="<?php echo htmlspecialchars( $product["desphoto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" alt="Photo">
-                </div>
-              </div>
+                <label for="file">Foto</label>
+                <input type="file" class="form-control" id="file" name="file">              
             </div>
           </div>
           <!-- /.box-body -->

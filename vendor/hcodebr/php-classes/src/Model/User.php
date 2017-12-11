@@ -27,6 +27,12 @@ Class User extends Model {
 		return $user;
 	}
 
+	public function setToSession()
+	{
+
+    	$_SESSION[User::SESSION] = $this->getValues();
+
+	}
 
 	public static function checkLogin($inadmin = true)
  	{
