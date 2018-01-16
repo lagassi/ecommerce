@@ -166,7 +166,7 @@ Class User extends Model {
 			":iduser"=>$this->getiduser(),
 			":desperson"=>utf8_decode($this->getdesperson()),
 			":deslogin"=>$this->getdeslogin(),
-			":despassword"=>$this->getdespassword(),
+			":despassword"=>User::getPasswordHash($this->getdespassword()),
 			":desemail"=>$this->getdesemail(),
 			":nrphone"=>$this->getnrphone(),
 			":inadmin"=>$this->getinadmin()
@@ -301,7 +301,7 @@ Class User extends Model {
  	public static function clearError()
  	{
  
- 		$_SESSION[User::SUCCESS] = NULL;
+ 		$_SESSION[User::ERROR] = NULL;
  
  	}
 
