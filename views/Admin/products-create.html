@@ -55,7 +55,7 @@
             </div>
             <div class="form-group">
                 <label for="file">Foto</label>
-                <input type="file" class="form-control" id="file" name="file">              
+                <input type="file" class="form-control" multiple id="file" name="file">              
             </div>
           </div>
           <!-- /.box-body -->
