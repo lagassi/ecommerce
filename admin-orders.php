@@ -1,10 +1,9 @@
-<?php 
+<?php
 
 use \Hcode\PageAdmin;
 use \Hcode\Model\User;
 use \Hcode\Model\Order;
 use \Hcode\Model\OrderStatus;
-
 
 $app->get("/admin/orders/:idorder/status", function($idorder){
 
@@ -17,7 +16,6 @@ $app->get("/admin/orders/:idorder/status", function($idorder){
 	$page = new PageAdmin();
 
 	$page->setTpl("order-status", [
-
 		'order'=>$order->getValues(),
 		'status'=>OrderStatus::listAll(),
 		'msgSuccess'=>Order::getSuccess(),
@@ -31,7 +29,6 @@ $app->post("/admin/orders/:idorder/status", function($idorder){
 	User::verifyLogin();
 
 	if (!isset($_POST['idstatus']) || !(int)$_POST['idstatus'] > 0) {
-
 		Order::setError("Informe o status atual.");
 		header("Location: /admin/orders/".$idorder."/status");
 		exit;
@@ -49,10 +46,8 @@ $app->post("/admin/orders/:idorder/status", function($idorder){
 
 	header("Location: /admin/orders/".$idorder."/status");
 	exit;
+
 });
-
-
-
 
 $app->get("/admin/orders/:idorder/delete", function($idorder){
 
@@ -94,7 +89,6 @@ $app->get("/admin/orders", function(){
 	User::verifyLogin();
 
 	$search = (isset($_GET['search'])) ? $_GET['search'] : "";
-
 	$page = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 
 	if ($search != '') {
@@ -107,25 +101,24 @@ $app->get("/admin/orders", function(){
 
 	}
 
-
-
 	$pages = [];
 
 	for ($x = 0; $x < $pagination['pages']; $x++)
 	{
-		array_push($pages, [
 
-			'href'=>'/admin/orders?' . http_build_query([
-			'page'=>$x+1,
-			'search'=>$search
+		array_push($pages, [
+			'href'=>'/admin/orders?'.http_build_query([
+				'page'=>$x+1,
+				'search'=>$search
 			]),
 			'text'=>$x+1
 		]);
+
 	}
 
 	$page = new PageAdmin();
 
-	$page->setTpl("orders",[
+	$page->setTpl("orders", [
 		"orders"=>$pagination['data'],
 		"search"=>$search,
 		"pages"=>$pages
@@ -133,4 +126,4 @@ $app->get("/admin/orders", function(){
 
 });
 
- ?>
+?>

@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 use \Hcode\Model\User;
 use \Hcode\Model\Cart;
@@ -6,51 +6,55 @@ use \Hcode\Model\Cart;
 function formatPrice($vlprice)
 {
 
+	if (!$vlprice > 0) $vlprice = 0;
+
 	return number_format($vlprice, 2, ",", ".");
 
 }
 
 function formatDate($date)
 {
-  return date('d/m/Y', strtotime($date));
+
+	return date('d/m/Y', strtotime($date));
+
 }
 
 function checkLogin($inadmin = true)
- {
- 
- 	return User::checkLogin($inadmin);
- 
- }
- 
- function getUserName()
- {
- 
- 	$user = User::getFromSession();
- 
- 	return $user->getdesperson();
- 
-  }
+{
 
-  function getCartNrQtd()
-  {
+	return User::checkLogin($inadmin);
 
-  	$cart = Cart::getFromSession();
+}
 
-  	$totals = $cart->getProductsTotals();
+function getUserName()
+{
 
-  	return $totals['nrqtd'];
-  }
+	$user = User::getFromSession();
 
+	return $user->getdesperson();
 
-  function getCartVlsubtotal()
-  {
+}
 
-  	$cart = Cart::getFromSession();
+function getCartNrQtd()
+{
 
-  	$totals = $cart->getProductsTotals();
+	$cart = Cart::getFromSession();
 
-  	return formatPrice($totals['vlprice']);
-  }
+	$totals = $cart->getProductsTotals();
 
+	return $totals['nrqtd'];
+
+}
+
+function getCartVlSubTotal()
+{
+
+	$cart = Cart::getFromSession();
+
+	$totals = $cart->getProductsTotals();
+
+	return formatPrice($totals['vlprice']);
+
+}
 
  ?>

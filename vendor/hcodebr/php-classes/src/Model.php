@@ -2,7 +2,7 @@
 
 namespace Hcode;
 
-Class Model {
+class Model {
 
 	private $values = [];
 
@@ -14,6 +14,7 @@ Class Model {
 
 		switch ($method)
 		{
+
 			case "get":
 				return (isset($this->values[$fieldName])) ? $this->values[$fieldName] : NULL;
 			break;
@@ -21,21 +22,27 @@ Class Model {
 			case "set":
 				$this->values[$fieldName] = $args[0];
 			break;
+
 		}
+
 	}
 
 	public function setData($data = array())
 	{
 
 		foreach ($data as $key => $value) {
+			
 			$this->{"set".$key}($value);
+
 		}
+
 	}
 
 	public function getValues()
 	{
 
 		return $this->values;
+
 	}
 
 }

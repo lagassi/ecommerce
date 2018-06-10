@@ -9,7 +9,6 @@ $app->get("/admin/products", function(){
 	User::verifyLogin();
 
 	$search = (isset($_GET['search'])) ? $_GET['search'] : "";
-
 	$page = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 
 	if ($search != '') {
@@ -22,21 +21,22 @@ $app->get("/admin/products", function(){
 
 	}
 
-
-
 	$pages = [];
 
 	for ($x = 0; $x < $pagination['pages']; $x++)
 	{
-		array_push($pages, [
 
-			'href'=>'/admin/products?' . http_build_query([
-			'page'=>$x+1,
-			'search'=>$search
+		array_push($pages, [
+			'href'=>'/admin/products?'.http_build_query([
+				'page'=>$x+1,
+				'search'=>$search
 			]),
 			'text'=>$x+1
 		]);
+
 	}
+
+	$products = Product::listAll();
 
 	$page = new PageAdmin();
 
@@ -59,20 +59,18 @@ $app->get("/admin/products/create", function(){
 });
 
 $app->post("/admin/products/create", function(){
- 
+
 	User::verifyLogin();
- 
+
 	$product = new Product();
- 
+
 	$product->setData($_POST);
- 
+
 	$product->save();
- 
-    $product->setPhoto($_FILES["file"]);
- 
+
 	header("Location: /admin/products");
 	exit;
- 
+
 });
 
 $app->get("/admin/products/:idproduct", function($idproduct){
@@ -92,23 +90,23 @@ $app->get("/admin/products/:idproduct", function($idproduct){
 });
 
 $app->post("/admin/products/:idproduct", function($idproduct){
- 
- 	User::verifyLogin();
- 
- 	$product = new Product();
- 
- 	$product->get((int)$idproduct);
- 
- 	$product->setData($_POST);
- 
- 	$product->save();
- 
- 	$product->setPhoto($_FILES["file"]);
- 
- 	header('Location: /admin/products');
- 	exit;
- 
- });
+
+	User::verifyLogin();
+
+	$product = new Product();
+
+	$product->get((int)$idproduct);
+
+	$product->setData($_POST);
+
+	$product->save();
+
+	$product->setPhoto($_FILES["file"]);
+
+	header('Location: /admin/products');
+	exit;
+
+});
 
 $app->get("/admin/products/:idproduct/delete", function($idproduct){
 
@@ -120,10 +118,9 @@ $app->get("/admin/products/:idproduct/delete", function($idproduct){
 
 	$product->delete();
 
- 	header('Location: /admin/products');
- 	exit;	
+	header('Location: /admin/products');
+	exit;
 
 });
-
 
  ?>
