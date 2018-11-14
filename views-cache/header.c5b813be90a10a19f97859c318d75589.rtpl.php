@@ -31,6 +31,12 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <script type="text/javascript">
+        
+        window.scripts = [];
+
+    </script>
   </head>
   <body>
    
@@ -43,16 +49,14 @@
                             <li><a href="/profile"><i class="fa fa-user"></i> Minha Conta</a></li>
                             <li><a href="#"><i class="fa fa-heart"></i> Lista de Desejos</a></li>
                             <li><a href="/cart"><i class="fa fa-shopping-cart"></i> Meu Carrinho</a></li>
-                            <?php if( !checkLogin(false) ){ ?>
-
-                            <li><a href="/login"><i class="fa fa-lock"></i> Login</a></li>
-                            <?php }else{ ?>
+                            <?php if( checkLogin(false) ){ ?>
 
                             <li><a href="/profile"><i class="fa fa-user"></i> <?php echo getUserName(); ?></a></li>
-                            <li><a href="/logout"><i class="fa fa-lock"></i> Sair</a></li>
- 
-                            <?php } ?>
+                            <li><a href="/logout"><i class="fa fa-close"></i> Sair</a></li>
+                            <?php }else{ ?>
 
+                            <li><a href="/login"><i class="fa fa-lock"></i> Login</a></li>
+                            <?php } ?>
 
                         </ul>
                     </div>
@@ -95,7 +99,7 @@
                 
                 <div class="col-sm-6">
                     <div class="shopping-item">
-                        <a href="/cart">Carrinho - <span class="cart-amunt">R$<?php echo getCartVlSubtotal(); ?></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><?php echo getCartNrQtd(); ?></span></a>
+                        <a href="/cart">Carrinho - <span class="cart-amunt">R$<?php echo getCartVlSubTotal(); ?></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><?php echo getCartNrQtd(); ?></span></a>
                     </div>
                 </div>
             </div>

@@ -22,10 +22,7 @@ $app->get('/payment', function(){
 		array_push($years, $y);
 	}
 
-	$page = new Page([
-
-		"footer"=>false
-	]);
+	$page = new Page();
 
 	$page->setTpl("payments", [
 		"order"=>$order->getValues(),
@@ -33,7 +30,9 @@ $app->get('/payment', function(){
 		"years"=>$years,
 		"pagseguro"=>[
 			"urlJS"=>Config::getUrlJS(),
-			"id"=>Transporter::createSession()
+			"id"=>Transporter::createSession(),
+            "maxInstallmentNoInterest"=>Config::MAX_INSTALLMENT_NO_INTEREST,
+            "maxInstallment"=>Config::MAX_INSTALLMENT
 		]
 	]);
 
